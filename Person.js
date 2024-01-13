@@ -5,7 +5,7 @@ class Person {
     }
 
     sayMyName() {
-        return `O nome informado é ${this.nome}!`;
+        return `O nome informado é ${this.nome}! Usando Nodemon`;
     }
 
 }
