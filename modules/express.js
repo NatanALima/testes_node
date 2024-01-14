@@ -6,18 +6,26 @@ const app = express();
 // Indica que para todas as requisições será utilizada o JSON
 app.use(express.json());
 
-app.get('/home', (req, res) => {
-    res.status(200).send('<h1>Página Inicial</h1>')
-});
+// Seleciona todos os dados do banco de dados
+app.get('/users', async (req, res) => {
+    try {
+        const users = await UserModel.find({});
+        res.status(200).json(users);
 
-app.get('/users', (req, res) => {
-    const users = [
-        {name: "John Doe",
-         email: "john@doe.com"},
-        {name: "Jane Doe",
-         email: "jane@doe.com"}
-    ]
-    res.status(200).json(users);
+    } catch(err) {
+        res.status(500).send(err.message);
+    }
+})
+
+// Consulta usuário pelo ID
+app.get('/users/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await UserModel.findById(id);
+        res.status(200).json(user);
+    } catch(err) {
+        res.status(500).send(err.message);
+    }
 })
 
 app.post('/users', async (req, res) => {
