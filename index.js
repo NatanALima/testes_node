@@ -4,5 +4,6 @@ const person = new Person('Nome');
 // console.log(person.sayMyName());
 
 
-require('./modules/path');
+// require('./modules/path');
+// require('./modules/fs');
 
