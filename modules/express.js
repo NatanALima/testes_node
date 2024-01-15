@@ -56,6 +56,18 @@ app.patch('/users/:id', async (req, res) => {
     }
 })
 
+//Deleta dados no Banco de dados
+app.delete('/users/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await UserModel.findByIdAndDelete(id, {new: true});
+        res.status(200).json(user);
+
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
 const port = 8080;
 
 app.listen(port, () => console.log(`Rodando com Express na porta ${port}`));
