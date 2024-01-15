@@ -6,6 +6,14 @@ const app = express();
 // Indica que para todas as requisições será utilizada o JSON
 app.use(express.json());
 
+//Criação de Middlewares
+//Utilizado para executar algo antes de qualquer outra ação app
+app.use((req, res, next) => {
+    console.log(`Request Type: ${req.method}`);
+    console.log(`Date: ${new Date()}`);
+    next();
+})
+
 // Seleciona todos os dados do banco de dados
 app.get('/users', async (req, res) => {
     try {
