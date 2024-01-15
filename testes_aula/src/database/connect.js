@@ -6,7 +6,7 @@ const connectToDatabase = async () => {
         console.log('Conexão realizada com Sucesso!');
 
     } catch (err) {
-        console.log(err);
+        console.log(process.env.MONGODB_USER);
     }
     
 }

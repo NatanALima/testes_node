@@ -4,7 +4,8 @@
   "description": "Testes/estudos destinados ao node",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon index.js"
+    "start-aula:dev": "nodemon testes_aula/index.js",
+    "start-teste:dev": "nodemon testes_natan/index.js"
   },
   "author": "",
   "license": "ISC",
