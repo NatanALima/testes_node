@@ -17,7 +17,7 @@ app.get('/users', async (req, res) => {
     }
 })
 
-// Consulta usuário pelo ID
+// Consulta dados pelo ID
 app.get('/users/:id', async(req, res) => {
     try {
         const id = req.params.id;
@@ -28,6 +28,7 @@ app.get('/users/:id', async(req, res) => {
     }
 })
 
+//Insere dados ao Banco de dados
 app.post('/users', async (req, res) => {
     try {
         const user = await UserModel.create(req.body);
@@ -39,6 +40,20 @@ app.post('/users', async (req, res) => {
 
     }
     
+})
+
+//Edita dados no Banco de dados
+app.patch('/users/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        //O uso do New serve para indicar ao banco que o mesmo deverá retornar o valor já atualizado. Caso não houvesse esse parâmetro, o banco retornaria os dados de ANTES do UPDATE
+        const user = await UserModel.findByIdAndUpdate(id, req.body, {new: true})
+        res.status(200).json(user);
+
+    } catch(err) {
+        res.status(500).send(err.message);
+
+    }
 })
 
 const port = 8080;
