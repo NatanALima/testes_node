@@ -3,9 +3,12 @@ const express = require("express");
 const app = express();
 const port = 8080;
 
-const frasesRoutes = require('./teste_routes/routes/frases');
 
+/* Primeiro teste */
+// const frasesRoutes = require('./teste_routes/routes/frases');
+// app.use(frasesRoutes);
 
-app.use("/", frasesRoutes);
+const userRoutes = require('./routes/user');
+app.use(userRoutes);
 
 app.listen(port, () => console.log("tudo OK!"))
