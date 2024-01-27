@@ -1,21 +1,56 @@
-const users = [{id: 1, nome: "Carlinhos"},
-               {id: 2, nome: "Rodolfo"}];
+const userModel = require('../models/user.model');
 
-exports.getAllUsers = (req, res) => {
-    res.status(200).json({
-        info: "Consultou todos os usuários",
-        data: {
-            users
-        }
-    })
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await userModel.find({});
+        users.length > 0 ? res.status(200).json(users) : res.status(200).send('Coleção Vazia!');
+
+    } catch(err) {
+        res.status(500).send(err.message);
+        
+    }
+    
 }
 
-exports.getOneUser = (req, res) => {
-    const userInfo = users.filter(item => item.id == req.params.id)[0];
-    res.status(200).json({
-        info: "Consultou apenas um usuário",
-        data: {
-            user: userInfo
-        }
-    })
+exports.getOneUser = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.params.id);
+        res.status(200).json(user);
+
+    } catch(err) {
+        res.status(500).send(err.message);
+
+    }
+}
+
+exports.insertOneUser = async (req, res) => {
+    try {
+        const user = await userModel.create(req.body);
+        res.status(201).json(user);
+    
+    } catch(err) {
+        res.status(500).send(err.message);
+    }
+    
+}
+
+exports.insertManyUser = async (req, res) => {
+    try {
+        const user = await userModel.insertMany(req.body);
+        res.status(201).json(user);
+
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
+exports.updateByIdUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await userModel.findByIdAndUpdate(id, req.body, {new: true})
+        res.status(201).json(user);
+
+    } catch(err) {
+        res.status(500).send(err.message);
+    }
 }

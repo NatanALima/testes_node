@@ -5,10 +5,13 @@ const router = express.Router();
 
 router
     .route("/user")
-    .get(userController.getAllUsers);
+    .get(userController.getAllUsers)
+    .post(userController.insertOneUser)
+    .post(userController.insertManyUser)
 
 router
     .route("/user/:id")
-    .get(userController.getOneUser);
+    .get(userController.getOneUser)
+    .patch(userController.updateByIdUser)
 
 module.exports = router;
